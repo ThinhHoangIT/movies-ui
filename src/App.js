@@ -1,4 +1,4 @@
-// import 'swiper/swiper.min.css';
+import 'swiper/swiper.min.css';
 import { Fragment } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
