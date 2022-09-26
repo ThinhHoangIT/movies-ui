@@ -18,7 +18,7 @@ function HeroSlide() {
     useEffect(() => {
         const getMovies = async () => {
             dispatch(loadingStart());
-            const params = { page: 2 };
+            const params = { page: 3 };
             try {
                 const response = await tmdbApi.getMoviesList(movieType.popular, { params });
                 setMovieItems(response.results.slice(0, 5));
@@ -38,7 +38,7 @@ function HeroSlide() {
                 spaceBetween={0}
                 slidesPerView={1}
                 speed={1200}
-                // autoplay={{ delay: 3000, disableOnInteraction: true }}
+                autoplay={{ delay: 3000, disableOnInteraction: true }}
             >
                 {movieItems.map((item, index) => (
                     <SwiperSlide key={index}>
@@ -68,9 +68,9 @@ const HeroSlideItem = (props) => {
 
         const videos = await tmdbApi.getVideos(category.movie, item.id);
 
-        if (videos.data.results.length > 0) {
-            const videoSrc = 'https://www.youtube.com/embed/' + videos.data.results[0].key;
-            modal.querySelector('.modal__content > iframe').setAttribute('src', videoSrc);
+        if (videos.results.length > 0) {
+            const videSrc = 'https://www.youtube.com/embed/' + videos.results[0].key;
+            modal.querySelector('.modal__content > iframe').setAttribute('src', videSrc);
         } else {
             modal.querySelector('.modal__content > iframe').setAttribute('height', 0);
             modal.querySelector('.modal__content > iframe').setAttribute('width', 0);

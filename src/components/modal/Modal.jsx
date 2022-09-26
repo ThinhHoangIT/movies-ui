@@ -4,18 +4,19 @@ import { useRef, useEffect, useState } from 'react';
 
 import './Modal.scss';
 
-function Modal(props) {
+const Modal = (props) => {
     const [active, setActive] = useState(false);
 
     useEffect(() => {
         setActive(props.active);
     }, [props.active]);
+
     return (
         <div id={props.id} className={`modal ${active ? 'active' : ''}`}>
             {props.children}
         </div>
     );
-}
+};
 
 Modal.propTypes = {
     active: PropTypes.bool,
@@ -26,7 +27,7 @@ export const ModalContent = (props) => {
     const contentRef = useRef(null);
 
     const closeModal = () => {
-        contentRef.current.classList.remove('active');
+        contentRef.current.parentNode.classList.remove('active');
         if (props.onClose) props.onClose();
     };
 
