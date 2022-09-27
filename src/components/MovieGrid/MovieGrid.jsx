@@ -27,7 +27,7 @@ export default function MovieGrid(props) {
                 switch (props.category) {
                     case category.movie:
                         response = await tmdbApi.getMoviesList(movieType.upcoming, { params });
-                        console.log(response);
+                        // console.log(response);
 
                         break;
                     default:

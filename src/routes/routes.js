@@ -2,7 +2,7 @@ import config from '~/config';
 
 // Pages
 import Catalog from '~/pages/Catalog';
-import Detail from '~/pages/Detail';
+import Detail from '~/pages/Detail/Detail';
 import Home from '~/pages/Home';
 
 const publicRoutes = [
