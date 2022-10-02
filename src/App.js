@@ -6,9 +6,14 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import '~/App.scss';
 import { DefaultLayout } from '~/layouts';
+import Loading from '~/components/loading/Loading';
+import { selectLoading } from './redux/userSlice';
+import { useSelector } from 'react-redux';
 import { publicRoutes } from '~/routes';
 import '~/assets/boxicons-2.0.7/css/boxicons.min.css';
 function App() {
+    const isLoading = useSelector(selectLoading);
+
     return (
         <Router>
             <Routes>
@@ -28,6 +33,7 @@ function App() {
                             path={route.path}
                             element={
                                 <>
+                                    {isLoading && <Loading />}
                                     <Layout>
                                         <Page />
                                     </Layout>

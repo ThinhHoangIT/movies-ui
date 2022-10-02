@@ -133,11 +133,17 @@
             background-repeat: no-repeat;
             border-radius: $border-radius;
             margin-bottom: 0.5rem;
+            cursor: pointer;
         }
 
         &__name {
             font-size: 0.8rem;
             text-align: center;
+        }
+
+        &:hover {
+            color: $main-color;
+            transition: 0.3s ease;
         }
     }
 }
