@@ -21,16 +21,60 @@
         content: '';
         position: absolute;
         top: 0;
-        right: 0;
         left: 0;
         bottom: 0;
+        right: 0;
         background-color: $black;
         opacity: 0;
         transition: opacity 0.3s ease;
         border-radius: $border-radius;
     }
 
-    @media (hover: hover) and (pointer: fine) {
+    &_liked {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        font-size: 1.8rem;
+        transition: opacity 0.3s ease;
+        cursor: pointer;
+
+        &-outline {
+            opacity: 0;
+        }
+
+        &-fill {
+            color: $main-color;
+            background-color: rgba($color: #000000, $alpha: 0.5);
+            border-radius: 30%;
+        }
+    }
+
+    &_close {
+        position: absolute;
+        top: 13px;
+        right: 13px;
+        font-size: 2rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        cursor: pointer;
+
+        &:hover {
+            color: $main-color;
+        }
+
+        // &-fill {
+        //     color: $main-color;
+        //     background-color: rgba($color: #000000, $alpha: 0.5);
+        //     border-radius: 30%;
+        // }
+    }
+
+    @media (hover: hover) {
+        &:hover &_liked-outline,
+        &:hover &_close {
+            opacity: 1;
+        }
+
         &:hover::before {
             opacity: 0.8;
         }
@@ -39,7 +83,21 @@
             transform: translate(-50%, -50%) scale(1);
         }
     }
-    &__title {
-        text-align: center;
-    }
+}
+
+.movie-card_title {
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.movie-card:hover + .movie-card_title {
+    color: $main-color;
+}
+
+.noti-modal_title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 500;
 }

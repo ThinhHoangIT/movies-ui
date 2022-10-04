@@ -9,42 +9,78 @@ import { DefaultLayout } from '~/layouts';
 import Loading from '~/components/loading/Loading';
 import { selectLoading } from './redux/userSlice';
 import { useSelector } from 'react-redux';
-import { publicRoutes } from '~/routes';
+import { publicRoutes, privateRoutes } from '~/routes';
 import '~/assets/boxicons-2.0.7/css/boxicons.min.css';
+import AuthUser from './features/auth/AuthUser';
+import { NotiModal } from './components/MovieCard/MovieCard';
+
 function App() {
     const isLoading = useSelector(selectLoading);
 
     return (
-        <Router>
-            <Routes>
-                {publicRoutes.map((route, index) => {
-                    const Page = route.component;
-                    let Layout = DefaultLayout;
+        <AuthUser>
+            <Router>
+                <Routes>
+                    {publicRoutes.map((route, index) => {
+                        const Page = route.component;
 
-                    if (route.layout) {
-                        Layout = route.layout;
-                    } else if (route.layout === null) {
-                        Layout = Fragment;
-                    }
+                        let Layout = DefaultLayout;
 
-                    return (
-                        <Route
-                            key={index}
-                            path={route.path}
-                            element={
-                                <>
-                                    {isLoading && <Loading />}
-                                    <Layout>
-                                        <Page />
-                                    </Layout>
-                                </>
-                            }
-                        />
-                    );
-                })}
-            </Routes>
-        </Router>
+                        if (route.layout) {
+                            Layout = route.layout;
+                        } else if (route.layout === null) {
+                            Layout = Fragment;
+                        }
+
+                        return (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                element={
+                                    <>
+                                        {isLoading && <Loading />}
+                                        <NotiModal />
+                                        <Layout>
+                                            <Page />
+                                        </Layout>
+                                    </>
+                                }
+                            />
+                        );
+                    })}
+                    {privateRoutes.map((route, index) => {
+                        const Page = route.component;
+
+                        let Layout = DefaultLayout;
+
+                        const ProtectedRoute = route.protected;
+
+                        if (route.layout) {
+                            Layout = route.layout;
+                        } else if (route.layout === null) {
+                            Layout = Fragment;
+                        }
+
+                        return (
+                            <Route
+                                key={index}
+                                path={route.path}
+                                element={
+                                    <>
+                                        {isLoading && <Loading />}
+                                        <Layout>
+                                            <ProtectedRoute>
+                                                <Page />
+                                            </ProtectedRoute>
+                                        </Layout>
+                                    </>
+                                }
+                            />
+                        );
+                    })}
+                </Routes>
+            </Router>
+        </AuthUser>
     );
 }
-
 export default App;
